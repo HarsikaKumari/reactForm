@@ -3,10 +3,11 @@ import React, { useState } from 'react'
 const App = () => {
     const [headingText, setHeadingText] = useState("");
     const [isMouseOver, setMouseOver] = useState(false);
-    const [name, setName] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
 
-    function handleClick( event) {
-        setHeadingText(name);
+    function handleClick(event) {
+        setHeadingText(firstName+" "+lastName);
 
         event.preventDefault();
       }
@@ -19,8 +20,12 @@ const App = () => {
         setMouseOver(false);
       }
 
-      function handleChange(event) {
-        setName(event.target.value);
+      function handleChangeFirst(event) {
+        setFirstName(event.target.value);
+      }
+
+      function handleChangeLast(event) {
+        setLastName(event.target.value);
       }
 
     return (
@@ -31,8 +36,14 @@ const App = () => {
             <form onSubmit={handleClick}> 
             <input
                 type="text"
-                placeholder="What's your name?"
-                onChange={handleChange}
+                placeholder="First name"
+                onChange={handleChangeFirst}
+                 />
+            
+            <input
+                type="text"
+                placeholder="Last name"
+                onChange={handleChangeLast}
                  />
                  
 
