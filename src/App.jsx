@@ -5,15 +5,15 @@ const App = () => {
   const [subHeading, setSubHeading] = useState("");
   const [isMouseOver, setMouseOver] = useState(false);
   const [contact, setContact] = useState({
-    firstName: "",
-    lastName: "",
+    fName: "",
+    lName: "",
     email: ""
   });
 
   function handleClick(event) {
     event.preventDefault();
 
-    setHeadingText(contact.firstName + " " + contact.lastName);
+    setHeadingText(contact.fName + " " + contact.lName);
     setSubHeading(contact.email);
   }
 
@@ -28,25 +28,10 @@ const App = () => {
   function handleChange(event) {
     const { name, value } = event.target;
 
-    setContact(prev => {
-      if (name === "fName") {
-        return {
-          firstName: value,
-          lastName: prev.lastName,
-          email: prev.email
-        };
-      } else if (name === "lName") {
-        return {
-          firstName: prev.firstName,
-          lastName: value,
-          email: prev.email
-        };
-      } else if (name === "email") {
-        return {
-          firstName: prev.firstName,
-          lastName: prev.lastName,
-          email: value
-        };
+    setContact(prev => { 
+      return {
+        ...prev,
+        [name]: value
       }
     });
   }
@@ -56,21 +41,21 @@ const App = () => {
     <div className="container">
 
       <h1>Hello {headingText} </h1>
-      <p> {subHeading}</p>
+      <p>{subHeading}</p>
 
       <form onSubmit={handleClick}>
         <input
           type="text" name="fName"
           placeholder="First name"
           onChange={handleChange}
-          value={contact.firstName}
+          value={contact.fName}
         />
 
         <input
           type="text" name="lName"
           placeholder="Last name"
           onChange={handleChange}
-          value={contact.lastName}
+          value={contact.lName}
         />
 
         <input
